@@ -1,0 +1,2 @@
+import Link from "next/link";import {ICONS} from "@/lib/data";
+export default function ServiceCard({s}){return(<Link className="card" href={`/services/${s.slug}`}><div className="ico">{ICONS[s.slug]}</div><h3 style={{fontSize:17}}>{s.title}</h3><div className="mut" style={{fontSize:14}}>{s.summary}</div><div className="gold" style={{marginTop:8,fontWeight:600,fontSize:14}}>Learn more →</div></Link>)}

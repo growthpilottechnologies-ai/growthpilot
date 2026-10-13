@@ -1,0 +1,5 @@
+import Link from "next/link";import {SERVICES,SITE,ICONS} from "@/lib/data";
+export default function Header(){return(<>
+<div className="top"><div className="w"><span>📞 {SITE.phone} | ✉️ {SITE.email}</span><span>{SITE.socials.map(([n,u])=><a key={n} href={u} target="_blank" rel="noopener noreferrer" style={{marginLeft:12}}>{n}</a>)}</span></div></div>
+<header><div className="bar"><Link href="/"><img src="/logo.png" alt="GrowthPilot Technologies" width="140" height="56" style={{height:56,width:"auto"}}/></Link>
+<nav><Link href="/">Home</Link><Link href="/about">Company</Link><div className="dd"><Link href="/services" style={{display:"inline-block",padding:"16px 0"}}>360 Services ▾</Link><div>{SERVICES.map(s=><Link key={s.slug} href={`/services/${s.slug}`}>{ICONS[s.slug]} {s.title}</Link>)}</div></div><Link href="/pricing">Pricing</Link><Link href="/contact">Contact</Link><Link className="btn" href="/contact" style={{padding:"9px 18px",fontSize:13}}>Free Quote</Link></nav></div></header></>)}

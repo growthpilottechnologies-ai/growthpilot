@@ -1,0 +1,6 @@
+"use client";import {useState} from "react";import {useRouter} from "next/navigation";import {SERVICES} from "@/lib/data";
+export default function ContactForm(){const r=useRouter();const [busy,setBusy]=useState(false);const [err,setErr]=useState("");
+async function submit(e){e.preventDefault();setBusy(true);setErr("");const d=Object.fromEntries(new FormData(e.target));
+try{const res=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)});if(!res.ok)throw new Error();r.push("/thank-you")}catch{setErr("Something went wrong. Please call or email us directly.");setBusy(false)}}
+return(<form onSubmit={submit} className="card"><h3>Send an enquiry</h3><input name="name" required placeholder="Name"/><input name="email" type="email" required placeholder="Email"/><input name="phone" placeholder="Phone"/><input name="company" placeholder="Company"/>
+<select name="service">{SERVICES.map(s=><option key={s.slug}>{s.title}</option>)}</select><textarea name="details" required rows={4} placeholder="Project details"/>{err&&<p style={{color:"#dc2626"}}>{err}</p>}<button disabled={busy} className="btn" style={{width:"100%"}}>{busy?"Sending...":"Send Enquiry"}</button></form>)}
